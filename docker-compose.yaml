@@ -1,0 +1,18 @@
+version: '3.8'
+services:
+  localstack:
+    container_name: "localstack_main"
+    image: localstack/localstack
+    ports:
+      - "127.0.0.1:4566:4566" # S3 and other services
+      - "127.0.0.1:4510-4559:4510-4559" # Additional services if needed
+    environment:
+      - SERVICES=s3 # Only run S3 for this example
+      - DEFAULT_REGION=us-east-1 # Or any region you prefer
+      - AWS_ACCESS_KEY_ID=test # Dummy credentials
+      - AWS_SECRET_ACCESS_KEY=test # Dummy credentials
+      - PERSISTENCE=1
+    volumes:
+      # This is the CORRECT way to mount a volume for LocalStack persistence
+      - "${LOCALSTACK_VOLUME_DIR:-./localstack-data}:/var/lib/localstack"
+      # The previous mount to /tmp/localstack should be REMOVED or commented out

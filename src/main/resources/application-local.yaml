@@ -1,0 +1,57 @@
+# src/main/resources/application.yaml
+server:
+  port: 8080
+
+spring:
+  application:
+    name: filestorageapi
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/filestorage
+    username: root
+    password: password
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: true
+
+#  servlet:
+#    multipart:
+#      max-file-size: 100MB
+#      max-request-size: 100MB
+
+jwt:
+  secret: aa37a2bd6297bb30d39449b6ee1e7345550a6018a7708ec1e6c2d68bec8faa9c6424d7dcfa5eb6e5d11bcaf184b15c7b119aae99ceb0235f0e14a4629621bb26956c6d0018cbf999e9eedc70d1f535fda2b8791e85528585e8ff156c8a6bb1b6bc628d1ba3f4582c61f11b08d2cf5bbe84f98816d7cfc47c20f80a0a99ec01486c6155772c191b34c9660c699cfd8ca81c0da34f6837a2010bb802a030c56913bfab8e5c1b93cc38c471b307b80d3170f265c8c1c9fbbd1c5999383990df87bb1117edbd3c8864d5930a7633a9369aec9a359616acd3ca671e356f46fea8bf5517eaf9bc1275e088290985c3c160688b6689a87454ecb9ca741c04c4cc7063fe0fdebcee473867d87ab39c63361b308a8f5255dade80879217edc048d5513a3629c5988a6441d76a2949df64641b42a5a577374ba89f71415c9e7bb83ec0adaf # Replace with something stronger later
+  expiration: 86400000 # 1 day in milliseconds
+
+
+cloud:
+  aws:
+    region:
+      static: us-east-1
+    credentials:
+      secret-key: test
+      access-key: test
+  s3:
+    endpoint: http://localhost:4566
+    path-access-style: true
+    bucket: my-local-bucket
+  storage:
+    bin: recycle-bin
+    cron: 0 0 2 * * *
+    retention-days: 1
+
+
+
+logging:
+  level:
+    org:
+      springframework: INFO
+    com:
+      victor: DEBUG # Optional: set your package to debug for now

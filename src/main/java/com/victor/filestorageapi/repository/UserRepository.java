@@ -1,6 +1,6 @@
 package com.victor.filestorageapi.repository;
 
-import com.victor.filestorageapi.models.User;
+import com.victor.filestorageapi.models.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
